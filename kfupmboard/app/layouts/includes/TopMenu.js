@@ -31,7 +31,7 @@ export default function TopMenu() {
                                     <div className="border-b"/>
                                     <ul className="bg-white">
                                     <li className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer">
-                                            My items
+                                            My offered items
                                             </li>
                                         <li className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer">
                                             Sign Out
