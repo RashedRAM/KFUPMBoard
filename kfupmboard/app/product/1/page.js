@@ -42,7 +42,7 @@ export default function Product({ params }) {
                 <div className="text-sm">{product?.description}</div>
               </div>
 
-              <button className="bg-purple-900 text-white rounded-md px-4 py-2 mt-4 ">Contact</button>
+              <button className="bg-indigo-900 text-white rounded-md px-4 py-2 mt-4 ">Contact</button>
               <div/>
               <button className="bg-red-600 text-white rounded-md px-4 py-2 mt-4 ">Report</button>
 

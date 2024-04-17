@@ -16,7 +16,7 @@ export default function Offered() {
         <>
         <MainLayout>
             <div className="max-w-[1200px] mx-auto mb-8 min-h-[300px]">
-                <div className="text-2xl font-bold my-4">My Offerd Items</div>
+                <div className="text-2xl font-bold my-4">Your Offered Items</div>
                 <div className="relative flex items-baseline justify-between gap-2">
                     <div className="w-[75%]">
                         <OfferedItem key={product.id} product = {product} />

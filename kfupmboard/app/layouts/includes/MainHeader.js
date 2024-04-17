@@ -36,7 +36,7 @@ export default function MainHeader() {
                                                 type="text"
                                             />
                                 </div>
-                                <button className="flex items-center bg-blue-400 text-sm font-semibold text-white p-[11px] ml-2 px-14">
+                                <button className="flex items-center bg-indigo-600 text-sm font-semibold text-white p-[11px] ml-2 px-14">
                                             Search
                                         </button>
                                     
