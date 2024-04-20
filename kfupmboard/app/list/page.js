@@ -23,7 +23,7 @@ export default function List() {
                         className="w-full"
                         string={"item name"}
                         placeholder="item name"
-                        error="error ya habibi"
+                        
                         />
 
                     </div>
