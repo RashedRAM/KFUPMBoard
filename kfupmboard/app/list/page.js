@@ -3,6 +3,7 @@
 
 import MainLayout from "../layouts/MainLayout"
 import TextInput from "../components/TextInput"
+import Link from "next/link"
 //import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
 export default function List() {
@@ -20,12 +21,40 @@ export default function List() {
                     <div className="mb-4">
                         <TextInput
                         className="w-full"
-                        string={"test"}
+                        string={"item name"}
                         placeholder="item name"
                         error="error ya habibi"
                         />
 
                     </div>
+                    <div className="mb-4">
+                        <TextInput
+                        className="w-full"
+                        
+                        placeholder="item description"
+                        error="error ya habibi"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextInput
+                        className="w-full"
+                        
+                        placeholder="building mumber"
+                        error="error ya habibi"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+                            Upload Image
+                        </label>
+                        <input
+                            type="file"
+                            id="image"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                    </div>
+                    
+                    <Link href="/success">
                     <button className="
                                 mt-6
                                 w-full 
@@ -39,6 +68,10 @@ export default function List() {
                     >
                         List Item
                     </button>
+                    </Link>
+
+                    
+
                 </form>
 
                 </div>

@@ -36,9 +36,20 @@ export default function MainHeader() {
                                                 type="text"
                                             />
                                 </div>
-                                <button className="flex items-center bg-indigo-600 text-sm font-semibold text-white p-[11px] ml-2 px-14">
+                                        <button className="flex items-center bg-indigo-600 text-sm font-semibold text-white p-[11px] ml-2 px-14">
                                             Search
                                         </button>
+                                        <Link href="/list">
+                                        <button className="flex items-center bg-indigo-400 text-sm font-semibold text-white p-[1px] ml-2 px-14">
+                                            List Item
+                                        </button>
+                                        </Link>
+
+                                        <Link href="/offered">
+                                        <button className="flex items-center bg-red-400 text-sm font-semibold text-white  ml-2 ">
+                                            temp 
+                                        </button>
+                                        </Link>
                                     
 
                             </div>
