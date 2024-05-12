@@ -1,3 +1,5 @@
+// ALl our data that will be inserted into the database is here
+
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 
