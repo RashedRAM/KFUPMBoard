@@ -1,26 +1,25 @@
 "use client"
 import MainLayout from "./layouts/MainLayout";
 import Product from './components/Product';
+import useIsLoading from "./hooks/useIsLoading";
+import { useEffect, useState } from "react";
 
 export default function Home() {
 
-  const products = [
-    {
-      id: 1,
-      title: "Calulator",
-      description: "A calculator for all your needs",
-      building: 837,
-      url:"https://picsum.photos/id/7"
+  const [products, setProduct] = useState([])
 
-    },
-    {
-      id: 2,
-      title: "English Books",
-      description: "Oria Books",
-      building: 837,
-      url:"https://picsum.photos/id/4"
-    }
-  ]
+  const getProducts = async () => {
+    useIsLoading(true)
+
+    const response = await fetch('/api/products')
+    const prods = await response.json()
+
+    setProduct([])
+    setProduct(prods)
+    useIsLoading(false)
+  }
+
+  useEffect(() => { getProducts() }, [])
 
   return (
     <MainLayout>

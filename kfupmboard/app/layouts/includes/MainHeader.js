@@ -1,11 +1,42 @@
 "use client"
 
+import debounce from "debounce";
 import Link from "next/link";
+import { useState } from "react";
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BiLoaderCircle } from 'react-icons/bi'
 
 
 export default function MainHeader() {
+
+    const [items, setItems] = useState([])
+    const [isSearching, setIsSearching] = useState(null)
+
+    const handleSearchName = debounce(async (event) => {
+        if (event.target.value == "") {
+            setItems([])
+            return
+        }
+
+        setIsSearching(true)
+
+        try {
+            const response = await fetch(`/api/products/search-by-name/${event.target.value}`)
+            const result = await response.json()
+
+            if (result) {
+                setItems(result)
+                setIsSearching(false)
+                return
+            }
+            setItems([])
+            setIsSearching(false)
+        } catch (error) {
+            console.log(error)
+            alert(error)
+        }
+    }, 500)
+
     return (
         <>
         <div id="MainHeader" className="border-b">
@@ -32,9 +63,29 @@ export default function MainHeader() {
                                                     pl-3
                                                     focus:outline-none
                                                 "
+                                                onChange={handleSearchName}
                                                 placeholder="Search for stuff"
                                                 type="text"
                                             />
+                                            {isSearching ? <BiLoaderCircle className="mr-2 animate-spin" size={22} /> : null}
+                                        
+                                            {items.length > 0 ?
+                                                <div className="absolute bg-white max-w-[910px] h-auto w-full z-20 left-0 top-12 border p-1">
+                                                    {items.map((item) => (
+                                                        <div className="p-1" key={item.id}>
+                                                            <Link 
+                                                                href={`/product/${item?.id}`}
+                                                                className="flex items-center justify-between w-full cursor-pointer hover:bg-gray-200 p-1 px-2"
+                                                            >
+                                                                <div className="flex items-center">
+                                                                    <img className="rounded-md" width="40" src={item?.url+'/40'} />
+                                                                    <div className="truncate ml-2">{ item?.title }</div>
+                                                                </div>
+                                                            </Link>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            : null}
                                 </div>
                                         <button className="flex items-center bg-indigo-600 text-sm font-semibold text-white p-[11px] ml-2 px-14">
                                             Search
