@@ -18,5 +18,13 @@ export async function middleware(req) {
         return NextResponse.redirect(new URL('/auth', req.url));
     }
 
+    if (
+        !data?.session && (
+            req.nextUrl.pathname.startsWith('/list') 
+        )
+    ) {
+        return NextResponse.redirect(new URL('/auth', req.url));
+    }
+
     return res;
 }
