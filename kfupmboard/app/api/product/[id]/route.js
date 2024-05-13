@@ -14,7 +14,7 @@ export async function GET(req, context) {
         // }
         const {id} = context.params;
 
-        const product = await prisma.Products.findFirst({
+        const product = await prisma.products.findFirst({
             where: {
                 id: Number(id),
             },

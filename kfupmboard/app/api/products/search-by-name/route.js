@@ -9,7 +9,7 @@ export async function GET(req, context) {
     try {
         const { title } = context.params;
 
-        const items = await prisma.Products.findMany({
+        const items = await prisma.products.findMany({
             take: 5, 
             where: {
                 title: {

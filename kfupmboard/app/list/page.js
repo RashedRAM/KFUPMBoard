@@ -4,9 +4,127 @@
 import MainLayout from "../layouts/MainLayout"
 import TextInput from "../components/TextInput"
 import Link from "next/link"
-//import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import { useRouter } from "next/navigation"
+import { useUser } from "../context/user"
+import { useEffect, useState } from "react"
+import useIsLoading from "../hooks/useIsLoading"
+import useCreateProduct from "../hooks/useCreateProduct"
+import { toast } from "react-toastify"
+import ClientOnly from "../components/ClientOnly"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
 export default function List() {
+    const router = useRouter();
+    const { user } = useUser();
+
+    const [id, setId] = useState(null);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [building, setBuilding] = useState('');
+    const [url, setUrl] = useState('');
+    const [number, setNumber] = useState('');
+    // const [user_id, setUser_id] = useState('');
+    const [isCreatingItem, setIsCreatingItem] = useState(false);
+    const [error, setError] = useState('');
+
+    const showError = (type) => {
+        if (Object.entries(error).length > 0 && error?.type == type) {
+            return error.message;
+        }
+        return ''
+    }
+
+    const getProduct = async () => {
+        if(user?.id == null || user?.id == undefined) {
+            useIsLoading(false);
+            return
+        }
+
+        useIsLoading(false);
+        
+    }
+
+    useEffect(() => {
+        useIsLoading(true);
+        getProduct();
+    }, [user])
+
+    const createProduct = (result) => {
+        setId(result.id);
+        setTitle(result.title);
+        setDescription(result.description);
+        setBuilding(result.building);
+        setUrl(result.url);
+        setNumber(result.number);
+        // setUser_id(result.user_id);
+    }
+
+    const validate = () => {
+        setError({});
+        let isError = false;
+
+        if(!title){
+            setError({type: 'title', message: 'Title is required'});
+            isError = true;
+        } else if(!description){
+            setError({type: 'description', message: 'Description is required'});
+            isError = true;
+        } else if(!building){
+            setError({type: 'building', message: 'Building is required'});
+            isError = true;
+        // } else if(!url){
+        //     setError({type: 'url', message: 'URL is required'});
+        //     isError = true;
+        } else if(!number){
+            setError({type: 'number', message: 'Number is required'});
+            isError = true;
+        }
+
+        return isError;
+
+    }
+
+    const submit = async (event) => {
+        event.preventDefault();
+        let isError = validate();
+
+        if(isError){
+            toast.error(error.message, { autoClose: 3000})
+            return
+        }
+
+        console.log(user.id);
+
+        try{
+            setIsCreatingItem(true);
+            
+            const user_id = user.id;
+
+            const response = await useCreateProduct({
+                title,
+                description,
+                building,
+                url,
+                number,
+                user_id
+            });
+            
+            
+
+            createProduct(response);
+            setIsCreatingItem(false);
+
+            toast.success('Item listed successfully', { autoClose: 3000});
+
+            router.push(`/success`);
+
+        } catch (error) {
+            setIsCreatingItem(false);
+            console.log(error);
+            alert (error);
+        }
+    }
+
     return (
 
         <MainLayout>
@@ -17,45 +135,82 @@ export default function List() {
                 <div className="mx-auto bg-white rounded-lg p-3">
 
                 <div className="text-xl text-bold mb-2">Item Details</div>
-                <form>
+                <form onSubmit = {submit}>
                     <div className="mb-4">
-                        <TextInput
-                        className="w-full"
-                        string={"item name"}
-                        placeholder="item name"
-                        
-                        />
+                        <ClientOnly>
+                            <TextInput
+                            className="w-full"
+                            string={title}
+                            placeholder="item name"
+                            onUpdate={setTitle}
+                            error = {showError('title')}
+                            
+                            />
 
+                        </ClientOnly>
                     </div>
+
                     <div className="mb-4">
-                        <TextInput
-                        className="w-full"
-                        
-                        placeholder="item description"
-                        error="error ya habibi"
-                        />
+                        <ClientOnly>
+                            <TextInput
+                            className="w-full"
+                            string={description}
+                            placeholder="item description"
+                            onUpdate={setDescription}
+                            error = {showError('description')}
+                            
+                            />
+
+                        </ClientOnly>
                     </div>
+
                     <div className="mb-4">
-                        <TextInput
-                        className="w-full"
-                        
-                        placeholder="building mumber"
-                        error="error ya habibi"
-                        />
+                        <ClientOnly>
+                            <TextInput
+                            className="w-full"
+                            string={building}
+                            placeholder="building Number"
+                            onUpdate={setBuilding}
+                            error = {showError('building')}
+                            
+                            />
+
+                        </ClientOnly>
                     </div>
+
                     <div className="mb-4">
-                        <label htmlFor="image" className="block text-sm font-medium text-gray-700">
-                            Upload Image
-                        </label>
-                        <input
-                            type="file"
-                            id="image"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
+                        <ClientOnly>
+                            <TextInput
+                            className="w-full"
+                            string={number}
+                            placeholder="phone number"
+                            onUpdate={setNumber}
+                            error = {showError('number')}
+                            
+                            />
+
+                        </ClientOnly>
                     </div>
+
                     
-                    <Link href="/success">
-                    <button className="
+                    {/* <div className="mb-4">
+                        <ClientOnly>
+                            <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+                                Upload Image
+                            </label>
+                            <input
+                                type="file"
+                                id="image"
+                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                        </ClientOnly>
+                    </div> */}
+                    
+                    
+                    <button 
+                            type = "submit"
+                            disabled = {isCreatingItem}
+                            className={`
                                 mt-6
                                 w-full 
                                 text-white 
@@ -63,12 +218,19 @@ export default function List() {
                                 font-semibold 
                                 p-3 
                                 rounded
-                                bg-indigo-500
-                    "
+                                ${isCreatingItem ? 'bg-blue-800' : 'bg-blue-600'}
+                                `}
                     >
-                        List Item
+                        {!isCreatingItem ?
+                            <div>List Item</div>
+                            : <div className="flex items-center justify-center gap-2">
+                                <aiOutlineLoading3Quarters className="animate-spin"/>
+                                Please wait...
+
+                                </div>}
+                        
                     </button>
-                    </Link>
+                    
 
                     
 

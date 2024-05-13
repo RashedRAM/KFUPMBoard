@@ -21,6 +21,14 @@ model Products {
   description String
   building    Int
   url         String
-  user_id     Int
+  user_id     String       @db.Uuid
+  number      String
   created_at  DateTime?  @default(now()) @db.Timestamptz(6)
+  reports     Reports[]
+}
+
+model Reports {
+  id          Int        @id @default(autoincrement())
+  product_id  Int
+  product     Products   @relation(fields: [product_id], references: [id])
 }

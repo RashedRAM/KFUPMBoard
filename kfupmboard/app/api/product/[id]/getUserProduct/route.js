@@ -13,7 +13,7 @@ export async function GET() {
             throw Error("User not found");
         }
 
-        const res = await prisma.Products.findFirst({
+        const res = await prisma.products.findFirst({
             where: {
                 user_id: user?.id,
             },

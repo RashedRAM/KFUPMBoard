@@ -10,7 +10,7 @@ export async function GET() {
         const productsCount = await prisma.Products.count();
         const skip = Math.floor(Math.random() * productsCount);
 
-        const products = await prisma.Products.findMany({
+        const products = await prisma.products.findMany({
             take: 5,
             skip: skip,
         });

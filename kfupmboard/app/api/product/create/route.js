@@ -4,6 +4,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 export async function POST(req) {
+    
     const supabase = createServerComponentClient({ cookies });
 
     try {
@@ -15,13 +16,17 @@ export async function POST(req) {
 
         const body = await req.json();
 
-        const res = await prisma.Products.create({
+        console.log(body.user_id);
+
+
+        const res = await prisma.products.create({
             data: {
-                user_id: user?.id,
+                user_id: body.user_id,
                 title: body.title,
                 description: body.description,
-                building: body.building,
+                building: parseInt(body.building),
                 url: body.url,
+                number: body.number,
             },
         });
 
