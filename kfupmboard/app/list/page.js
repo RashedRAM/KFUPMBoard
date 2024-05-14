@@ -12,16 +12,24 @@ import useCreateProduct from "../hooks/useCreateProduct"
 import { toast } from "react-toastify"
 import ClientOnly from "../components/ClientOnly"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
+
 
 export default function List() {
     const router = useRouter();
     const { user } = useUser();
+    const supabase = createClientComponentClient();
+    // const express = require('express');
+    // const app = express();
+    // const cors = require('cors');
+    // app.use(cors());
 
     const [id, setId] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [building, setBuilding] = useState('');
-    // const [url, setUrl] = useState('');
+    let url ='https://picsum.photos/id/7';
     const [number, setNumber] = useState('');
     // const [user_id, setUser_id] = useState('');
     const [isCreatingItem, setIsCreatingItem] = useState(false);
@@ -48,6 +56,30 @@ export default function List() {
         useIsLoading(true);
         getProduct();
     }, [user])
+
+    // Cant upload photo if the photo name is in the database
+    async function uploadImage (event) {
+        console.log("file")
+        let file = event.target.files[0];
+        console.log("file")
+        console.log(file)
+        const { data, error} = await supabase
+            .storage
+            .from("Images")
+            .upload(file.name ,file)
+        if(data){
+            const { data } = supabase
+            .storage
+            .from('Images')
+            .getPublicUrl(file.name)
+            console.log(data)
+            url = data.publicUrl +"?"
+
+        }
+        else{
+            console.log(error)
+        }
+    }
 
     const createProduct = (result) => {
         setId(result.id);
@@ -94,12 +126,15 @@ export default function List() {
         }
 
         console.log(user.id);
+        console.log(url)
 
         try{
             setIsCreatingItem(true);
             
             const user_id = user.id;
-            const url = "https://picsum.photos/id/7"
+            
+                
+            
 
             const response = await useCreateProduct({
                 title,
@@ -194,18 +229,19 @@ export default function List() {
                     </div>
 
                     
-                    {/* <div className="mb-4">
+                    <div className="mb-4">
                         <ClientOnly>
                             <label htmlFor="image" className="block text-sm font-medium text-gray-700">
                                 Upload Image
                             </label>
                             <input
                                 type="file"
+                                onChange = {(e) => uploadImage(e)}
                                 id="image"
                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                         </ClientOnly>
-                    </div> */}
+                    </div>
                     
                     
                     <button 

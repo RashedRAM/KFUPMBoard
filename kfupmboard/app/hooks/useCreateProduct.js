@@ -1,6 +1,6 @@
 const useCreateProduct = async (details) => {
     
-    console.log(details.id);
+
     const response = await fetch('/api/product/create', {
         method: 'POST',
         headers: {
@@ -19,7 +19,7 @@ const useCreateProduct = async (details) => {
 
     
     const data = await response.json();
-    console.log("data");
+
     return data;
 
 }
