@@ -4,7 +4,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 export async function GET() {
-    const supabase = async createServerComponentClient({ cookies });
+    // const supabase = async createServerComponentClient({ cookies });
 
     try {
         const { data: {user} } = await supabase.auth.getUser();
