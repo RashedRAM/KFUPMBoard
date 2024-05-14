@@ -76,7 +76,12 @@ export default function Product({ params }) {
                             <div className="text-sm">{product?.description}</div>
                         </div>
 
-                        <button className="bg-indigo-900 text-white rounded-md px-4 py-2 mt-4 ">Contact</button>
+                        <div className="border-b py-1" />
+                        <div className="pt-3">
+                            <div className="font-semibold pb-1">Phone number:</div>
+                            <div className="text-sm">{product?.number}</div>
+                        </div>
+                        
                         <div />
                         <button 
                             className="bg-red-600 text-white rounded-md px-4 py-2 mt-4"
