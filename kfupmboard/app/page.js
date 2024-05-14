@@ -12,6 +12,8 @@ export default function Home() {
     useIsLoading(true)
 
     const response = await fetch('/api/products')
+    console.log("response")
+    console.log(response)
     const prods = await response.json()
 
     setProduct([])
