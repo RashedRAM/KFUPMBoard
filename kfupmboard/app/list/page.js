@@ -21,7 +21,7 @@ export default function List() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [building, setBuilding] = useState('');
-    const [url, setUrl] = useState('');
+    // const [url, setUrl] = useState('');
     const [number, setNumber] = useState('');
     // const [user_id, setUser_id] = useState('');
     const [isCreatingItem, setIsCreatingItem] = useState(false);
@@ -54,7 +54,7 @@ export default function List() {
         setTitle(result.title);
         setDescription(result.description);
         setBuilding(result.building);
-        setUrl(result.url);
+        // setUrl(result.url);
         setNumber(result.number);
         // setUser_id(result.user_id);
     }
@@ -99,6 +99,7 @@ export default function List() {
             setIsCreatingItem(true);
             
             const user_id = user.id;
+            const url = "https://picsum.photos/id/7"
 
             const response = await useCreateProduct({
                 title,
