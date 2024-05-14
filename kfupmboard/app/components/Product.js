@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+//styling for each product
 export default function Product({ product }) {
     
   return ( 

@@ -1,13 +1,11 @@
 import prisma from "@/app/libs/Prisma";
 import { NextResponse } from "next/server";
-// import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-// import { cookies } from "next/headers";
 
+
+//this function served to return product purely by its name for the search bar
 export async function GET(req, context) {
-    // const supabase = createServerComponentClient({ cookies });
 
-    console.log("context.params")
-
+    //will only take 5 products
     try {
         const { title } = context.params;
 

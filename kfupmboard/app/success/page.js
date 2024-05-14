@@ -4,6 +4,7 @@ import { FaHandHoldingHeart } from "react-icons/fa";
 import MainLayout from "../layouts/MainLayout"
 import Link from "next/link"
 
+//user interface for the user to know that the item was listed successfully
 export default function Success() {
   return (
     <>

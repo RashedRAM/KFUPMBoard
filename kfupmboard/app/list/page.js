@@ -15,23 +15,21 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 
-
+// page for creating an item
 export default function List() {
+
+    //connect to supabase and get the user info
     const router = useRouter();
     const { user } = useUser();
     const supabase = createClientComponentClient();
-    // const express = require('express');
-    // const app = express();
-    // const cors = require('cors');
-    // app.use(cors());
 
     const [id, setId] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [building, setBuilding] = useState('');
+    //this url is a placeholder for the image
     let url ='https://picsum.photos/id/7';
     const [number, setNumber] = useState('');
-    // const [user_id, setUser_id] = useState('');
     const [isCreatingItem, setIsCreatingItem] = useState(false);
     const [error, setError] = useState('');
 
@@ -42,6 +40,7 @@ export default function List() {
         return ''
     }
 
+    //get the product
     const getProduct = async () => {
         if(user?.id == null || user?.id == undefined) {
             useIsLoading(false);
@@ -52,12 +51,14 @@ export default function List() {
         
     }
 
+    //when pahe is loaded get the product
     useEffect(() => {
         useIsLoading(true);
         getProduct();
     }, [user])
 
     // Cant upload photo if the photo name is in the database
+    //function for uploading the image
     async function uploadImage (event) {
         console.log("file")
         let file = event.target.files[0];
@@ -68,6 +69,7 @@ export default function List() {
             .from("Images")
             .upload(file.name ,file)
         if(data){
+            //if succuful put the url of the image to the url
             const { data } = supabase
             .storage
             .from('Images')
@@ -81,6 +83,7 @@ export default function List() {
         }
     }
 
+    //set the variables from what they attain from result
     const createProduct = (result) => {
         setId(result.id);
         setTitle(result.title);
@@ -95,6 +98,7 @@ export default function List() {
         setError({});
         let isError = false;
 
+        //display error if the fields are not filled
         if(!title){
             setError({type: 'title', message: 'Title is required'});
             isError = true;
@@ -104,9 +108,6 @@ export default function List() {
         } else if(!building){
             setError({type: 'building', message: 'Building is required'});
             isError = true;
-        // } else if(!url){
-        //     setError({type: 'url', message: 'URL is required'});
-        //     isError = true;
         } else if(!number){
             setError({type: 'number', message: 'Number is required'});
             isError = true;
@@ -116,6 +117,7 @@ export default function List() {
 
     }
 
+    //submits all the data the user entered
     const submit = async (event) => {
         event.preventDefault();
         let isError = validate();
@@ -125,17 +127,11 @@ export default function List() {
             return
         }
 
-        console.log(user.id);
-        console.log(url)
-
         try{
             setIsCreatingItem(true);
             
             const user_id = user.id;
-            
-                
-            
-
+        
             const response = await useCreateProduct({
                 title,
                 description,
@@ -161,6 +157,7 @@ export default function List() {
         }
     }
 
+    //the ui
     return (
 
         <MainLayout>

@@ -1,6 +1,6 @@
 'use client';
 
-
+//styling for all texts inputs
 export default function TextInput({ string, placeholder, error, onUpdate }) {
 
   return (

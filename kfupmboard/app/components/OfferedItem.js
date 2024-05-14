@@ -2,6 +2,7 @@
 
 
 
+//styling for each product in page
 export default function OfferedItem({ product }) {
     
   return ( 

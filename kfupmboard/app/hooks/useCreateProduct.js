@@ -1,6 +1,6 @@
 const useCreateProduct = async (details) => {
     
-
+    //this will send a post request to the server to create a new product
     const response = await fetch('/api/product/create', {
         method: 'POST',
         headers: {

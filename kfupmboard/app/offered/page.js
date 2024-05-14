@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout";
 import OfferedItem from "../components/OfferedItem";
 
+// page for the items that the user has offered
 export default function Offered() {
 
     const product = {

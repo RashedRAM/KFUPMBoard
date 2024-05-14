@@ -7,7 +7,7 @@ import Footer from './includes/Footer';
 import { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
 
-
+//this is the comment for the template laytout the main page follows
 export default function MainLayout({ children }) {
     const [isLoading, setIsLoading] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
