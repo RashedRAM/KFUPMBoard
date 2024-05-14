@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 export default function AuthPage() {
     const supabase = createClientComponentClient();
 
-    console.log(window.location.origin)
+
 
     return (
         <>
