@@ -10,6 +10,7 @@ import Loading from '../components/Loading';
 
 export default function MainLayout({ children }) {
     const [isLoading, setIsLoading] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect (() => {
         window.addEventListener('storage', function () {
@@ -23,8 +24,8 @@ export default function MainLayout({ children }) {
             <div id="MainLayout" className="min-w-[410px] max-w-[1300px] mx-auto">
                 <div>
                     {isLoading ? <Loading/> : <div></div>}
-                    <TopMenu />
-                    <MainHeader/>
+                    <TopMenu setIsAdmin={setIsAdmin}/>
+                    <MainHeader isAdmin={isAdmin}/>
 
                     {children}
 
