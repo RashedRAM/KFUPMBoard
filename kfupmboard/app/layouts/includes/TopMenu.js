@@ -1,26 +1,19 @@
-// TopMenu.js
 
 "use client";
 
-//for the top meny with login and user name
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { useUser } from "@/app/context/user";
 import { useState } from "react";
 
 export default function TopMenu({ setIsAdmin }) {
-    //takes userr info
     const { user } = useUser();
-
-    //sets the role
     const [isMenu, setIsMenu] = useState(false);
     const [role, setRole] = useState('User');
 
-    //checks if the user is logged in allow the info square to be visible if not take to /auth
     const isLoggedIn = () => {
         if (user && user?.id) {
             return (
-                console.log(user.user_metadata.name),
                 <button
                     onClick={() => !isMenu ? setIsMenu(true) : setIsMenu(false)}
                     className="flex items-center gap-2 hover:underline cursor-pointer"
@@ -42,17 +35,18 @@ export default function TopMenu({ setIsAdmin }) {
     const toggleRole = () => {
         const newRole = role === 'User' ? 'Admin' : 'User';
         setRole(newRole);
-        setIsAdmin(newRole === 'Admin');
+        if (typeof setIsAdmin === 'function') {
+            setIsAdmin(newRole === 'Admin');
+        } else {
+            console.error('setIsAdmin is not a function');
+        }
     };
 
     return (
         <>
             <div id="TopMenu" className="border-b">
                 <div className="flex items-center justify-between w-full mx-auto max-w-[1200px]">
-                    <ul 
-                        id="TopMenuLeft"
-                        className="flex items-center text-[11px] text-[#333333] px-2 h-8"
-                    >
+                    <ul id="TopMenuLeft" className="flex items-center text-[11px] text-[#333333] px-2 h-8">
                         <li className="relative px-3">
                             {isLoggedIn()}
                             {user && user?.id && (
