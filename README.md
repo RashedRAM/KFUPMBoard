@@ -1,5 +1,5 @@
 # KFUPMBoard
-The main goal of this project is to help college students on campus easily share, donate, or borrow items they don't need. It's all about making life simpler and more connected. We achieve this by this website by allowing students to easily login and see thew available items as well as offer items.
+The main goal of this project is to help college students on campus easily share, donate, or borrow items they don't need. It's all about making life simpler and more connected. We achieve this by this website by allowing students to easily log in and see the available items and offer new items.
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -7,8 +7,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Features
 - **Offer Item**: Our website allows our users to offer items they are not in need of but others may into our website allowing people to find what they might need.
 - **Find items**: KFUPMBoard allows people in need of help with resources to easily be able to find what they need either by searching or browsing.
-- **Google cloud authenticated login** : we use supabase integrated google cloud for safe for users login ensuring everyone's data is safe.
-- **Dynamic Web Pages**: depending on the item selected different products is shown and list item will tie the item to your account allowing you to see your items in the my items page.
+- **Google Cloud authenticated login** : We use supabase integrated Google Cloud for safe user login ensuring everyone's data is safe.
+- **Dynamic Web Pages**: Depending on the item selected different products are shown and list item will tie the item to your account allowing you to see your items in the my items page.
 
 
 ## Getting Started
@@ -53,7 +53,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - **offeredItems**: This is the page that shows the items you are offering
 - **product**: This is the page for the products and dynamically works depending on the product id chosen
 
-## Technology Stacl
+## Technology Stack
  - **front-end**: REACT, CSS tailwind, javascript
  - **back-end**: Next.js, Supabase
 
