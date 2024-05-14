@@ -96,11 +96,7 @@ export default function MainHeader() {
                                         </button>
                                         </Link>
 
-                                        <Link href="/offered">
-                                        <button className="flex items-center bg-red-400 text-sm font-semibold text-white  ml-2 ">
-                                            temp 
-                                        </button>
-                                        </Link>
+                                        
                                     
 
                             </div>
