@@ -6,6 +6,8 @@ import { NextResponse } from "next/server";
 export async function GET(req, context) {
     // const supabase = createServerComponentClient({ cookies });
 
+    console.log("context.params")
+
     try {
         const { title } = context.params;
 
