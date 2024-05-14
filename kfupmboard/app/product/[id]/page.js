@@ -55,10 +55,6 @@ export default function Product({ params }) {
     const deleteProduct = async () => {
         
         try {
-            // await supabase
-            // .from('Products')
-            // .delete()
-            // .match({'id':product.id})
             const response = await fetch(`/api/product/delete/${params.id}`, {
                 method: 'DELETE',
                 headers: {
