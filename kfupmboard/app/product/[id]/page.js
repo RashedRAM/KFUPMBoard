@@ -2,28 +2,28 @@
 
 import useIsLoading from "@/app/hooks/useIsLoading"
 import MainLayout from "@/app/layouts/MainLayout"
+import { useUser } from "@/app/context/user";
 import { useEffect, useState } from "react"
 
 //the page for each proect
 export default function Product({ params }) {
     //this state is to get the product
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState({});
+    const { user } = useUser();
 
     //uses the api to get the product by id
     const getProduct = async () => {
-        useIsLoading(true)
-        setProduct({})
-
-        const response = await fetch(`/api/product/${params.id}`)
-        const prod = await response.json()
-        setProduct(prod)
-        useIsLoading(false)
-    }
+        useIsLoading(true);
+        const response = await fetch(`/api/product/${params.id}`);
+        const prod = await response.json();
+        setProduct(prod);
+        useIsLoading(false);
+    };
 
     //when the page is loaded get the product
     useEffect(() => {
-        getProduct()
-    }, [])
+        getProduct();
+    }, []);
 
     //function for reporting the product
     const reportProduct = async () => {
@@ -81,14 +81,20 @@ export default function Product({ params }) {
                             <div className="font-semibold pb-1">Phone number:</div>
                             <div className="text-sm">{product?.number}</div>
                         </div>
-                        
+
                         <div />
+
+                        {user?.id === product?.user_id ? (
+                        <button className="bg-red-600 text-white rounded-md px-4 py-2 mt-4">Delete</button>
+                    ) : (
                         <button 
                             className="bg-red-600 text-white rounded-md px-4 py-2 mt-4"
                             onClick={reportProduct}
                         >
                             Report
                         </button>
+                    )}
+                        
                     </div>
                 </div>
             </div>
