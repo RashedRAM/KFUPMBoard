@@ -5,6 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import Link from 'next/link';
+import useEffect from 'react';
 
 export default function AuthPage() {
     const supabase = createClientComponentClient();
@@ -22,6 +23,7 @@ export default function AuthPage() {
     Login / Register
 </div>
 
+useEffect (() => {
 <div className="max-w-[400px] mx-auto px-2">
     <Auth
         onlyThirdPartyProviders
@@ -31,7 +33,7 @@ export default function AuthPage() {
         appearance={{theme: ThemeSupa}}
     />
 </div>
-
+});
 </div>
         </>
     );
