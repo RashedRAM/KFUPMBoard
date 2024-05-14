@@ -1,17 +1,11 @@
 import prisma from "@/app/libs/Prisma";
 import { NextResponse } from "next/server";
-// import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-// import { cookies } from "next/headers";
 
+
+// this api is to get a specific product by its id
 export async function GET(req, context) {
-    // const supabase = createServerComponentClient({ cookies });
 
     try {
-        // const { data: {user} } = await supabase.auth.getUser();
-
-        // if (!user) {
-        //     throw Error("User not found");
-        // }
         const {id} = context.params;
 
         const product = await prisma.products.findFirst({
@@ -20,6 +14,7 @@ export async function GET(req, context) {
             },
         });
 
+        //disconnect prisoma to not cause traffic 
         await prisma.$disconnect();
         return NextResponse.json(product);
 

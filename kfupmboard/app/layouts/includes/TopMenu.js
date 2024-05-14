@@ -2,17 +2,21 @@
 
 "use client";
 
+//for the top meny with login and user name
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { useUser } from "@/app/context/user";
 import { useState } from "react";
 
 export default function TopMenu({ setIsAdmin }) {
+    //takes userr info
     const { user } = useUser();
 
+    //sets the role
     const [isMenu, setIsMenu] = useState(false);
     const [role, setRole] = useState('User');
 
+    //checks if the user is logged in allow the info square to be visible if not take to /auth
     const isLoggedIn = () => {
         if (user && user?.id) {
             return (

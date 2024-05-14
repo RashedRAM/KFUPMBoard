@@ -4,7 +4,7 @@ import Product from '../components/Product';
 import useIsLoading from "../hooks/useIsLoading";
 import { useEffect, useState } from "react";
 
-
+//page for the items the user is offering 
 export default function MyOfferedItemsPage() {
     const [products, setProduct] = useState([]);
   

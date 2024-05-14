@@ -4,9 +4,12 @@ import useIsLoading from "@/app/hooks/useIsLoading"
 import MainLayout from "@/app/layouts/MainLayout"
 import { useEffect, useState } from "react"
 
+//the page for each proect
 export default function Product({ params }) {
+    //this state is to get the product
     const [product, setProduct] = useState({})
 
+    //uses the api to get the product by id
     const getProduct = async () => {
         useIsLoading(true)
         setProduct({})
@@ -17,10 +20,12 @@ export default function Product({ params }) {
         useIsLoading(false)
     }
 
+    //when the page is loaded get the product
     useEffect(() => {
         getProduct()
     }, [])
 
+    //function for reporting the product
     const reportProduct = async () => {
         try {
             const response = await fetch('/api/report', {
@@ -42,6 +47,7 @@ export default function Product({ params }) {
         }
     }
 
+    //user interfacxe for the product
     return (
         <>
         <MainLayout>

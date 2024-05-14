@@ -2,6 +2,7 @@
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+//loading component
 export default function Loading() {
     
   return ( 

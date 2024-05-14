@@ -7,11 +7,15 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { BiLoaderCircle } from 'react-icons/bi'
 import { useUser } from "@/app/context/user";
 
+//this is for the main header with the logo and search and buttons
 export default function MainHeader({ isAdmin }) {
+
+    //set statuses for what state the search is in
     const [items, setItems] = useState([]);
     const [isSearching, setIsSearching] = useState(null);
     const { user } = useUser();
 
+    //a debounce function to search for the item
     const handleSearchName = debounce(async (event) => {
         if (event.target.value === "") {
             setItems([]);
@@ -21,9 +25,11 @@ export default function MainHeader({ isAdmin }) {
         setIsSearching(true);
 
         try {
+            //fetch the data from the api and searchg for product by name
             const response = await fetch(`/api/products/search-by-name/${event.target.value}`);
             const result = await response.json();
 
+            //if found stop searching
             if (result) {
                 setItems(result);
                 setIsSearching(false);

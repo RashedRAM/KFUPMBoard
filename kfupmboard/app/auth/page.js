@@ -7,6 +7,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
+
 export default function AuthPage() {
     const supabase = createClientComponentClient();
 

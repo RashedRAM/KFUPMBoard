@@ -6,6 +6,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const Context = createContext();
 
+//This provider will return user infgormation
 const Provider = ({children}) => {
     const router = useRouter();
 
@@ -19,17 +20,20 @@ const Provider = ({children}) => {
 
     const getCurrentSession = async () => {
         const res = await supabaseClient.auth.getSession();
+        //check if there is a session then return it
         if (res && res.data.session) {
             return res.data.session;
         }
 
+        //if not clear the user
         clearUser();
         return null;
     }
 
     const getCurrentUser = async () => {
-        if(id) return;
+        if(id) return; //check if information is already available if so return
 
+        //get all data of the user
         const res = await supabaseClient.auth.getUser();
         if(res && res.data.user){
 
@@ -54,12 +58,14 @@ const Provider = ({children}) => {
         isUser();
     }, [])
 
+    //sign out the user
     const signOut = async () => {
         await supabaseClient.auth.signOut();
         clearUser();
         router.push('/');
     }
 
+    //clear user info
     const clearUser = () => {
         setUser(null);
         setId(null);

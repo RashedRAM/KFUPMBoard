@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+//design for footer
 export default function Footer() {
     return (
         <>
