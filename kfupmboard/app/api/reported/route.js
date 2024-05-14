@@ -3,8 +3,16 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const reports = await prisma.reports.findMany({}
-    );
+    const reports = await prisma.reports.findMany({
+      include: {
+        product: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+    });
 
     await prisma.$disconnect();
     return NextResponse.json(reports);
